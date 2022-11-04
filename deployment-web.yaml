@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    app: nodejs
+    type: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs
+  template:
+    metadata:
+      labels:
+        app: nodejs
+        type: web
+    spec:
+      volumes:
+      - name: web
+        persistentVolumeClaim:
+          claimName: web
+      containers:
+      - name: node
+        image: node
+        ports:
+        - containerPort: 5000
+          name: web-port
+        workingDir: /web
+        command:
+        - npm
+        - start
+        volumeMounts:
+        - name: web
+          mountPath: /web
+
