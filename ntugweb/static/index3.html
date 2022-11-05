@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NTUG</title>
+    <link rel="stylesheet" href="/css/bulma.css">
+    <link rel="stylesheet" href="/css/bulma-pageloader.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue-cookies@1.7.3/vue-cookies.js"></script>
+    <link rel="icon" href="/img/NetApp.svg">
+  </head>
+  <body>
+    <div id="app">
+        <div class="modal is-active" v-if="winner>=0" @click="winner=-1">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">And the winner is....</p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body has-text-centered">
+              <h1 class="title">{{ surveys[winner].name }}</h1>
+              <h2 class="subtitle">{{ surveys[winner].company }}</h2>
+              <p class="notification is-warning">{{ surveys[winner].expectations }}</p>
+            </section>
+          </div>
+        </div>
+        <div class="pageloader is-active is-info" v-if="raffling"><span class="title is-size-3">{{ surveys[winner].name }}</span></div>
+        <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+            <div class="container">
+                <div class="navbar-brand">
+                <a class="navbar-item" href="http://www.netapp.com">
+                    <img src="/img/NetApp.ico" height="28">
+                </a>
+
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" v-on:click="showNav = !showNav" v-bind:class="{ 'is-active' : showNav }">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+                </div>
+
+                <div id="navbarBasicExample" class="navbar-menu" v-bind:class="{ 'is-active' : showNav }">
+                    <div class="navbar-start">
+                        <a href="/index3.html" class="navbar-item is-active">
+                            Attendee List
+                        </a>
+
+                        <a href="/admin3.html" class="navbar-item">
+                            Register
+                        </a>
+                    </div>
+
+                    <div class="navbar-end">
+                      <div class="navbar-item">
+
+                      </div>
+                        <div class="navbar-item">
+                        <div class="buttons">
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <section class="section">
+            <div class="container">
+              <div class="columns">
+                <div class="column">
+                  <h1 class="title">List of NTUG Attendees Feb 2022</h2>
+                  <button class="button is-info mb-3 is-medium" @click="raffle()"><span class="icon"><i class="fas fa-magic"></i></span><span>Raffle<span></button>
+                  <table class="table is-bordered is-striped is-fullwidth is-hoverable">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Company</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="survey in surveys" v-on:click="currentsurvey=survey" v-bind:class="{ 'is-selected' : survey.name===currentsurvey.name}">
+                        <td>{{ survey.name }}</td>
+                        <td>{{ survey.company }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div v-if="!!currentsurvey.name" class="column">
+                  <div class="panel-block">
+                    <h1 class="title">
+                        {{ currentsurvey.name }} - {{ currentsurvey.company }}
+                    </h1>
+                  </div>
+                  <div class="panel-block">
+                    <p>
+                        {{ currentsurvey.expectations }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </section>
+
+    </div>
+    <script type="text/javascript" src="/js/app3.js"></script>
+  </body>
+</html>
