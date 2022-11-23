@@ -13,8 +13,9 @@ mariadb=$(kubectl get pvc -n ntug | grep mariadb | awk {'print$3'} | grep -o '..
 ssh admin@192.168.0.101 vol show | grep $web > web.txt
 ssh admin@192.168.0.101 vol show | grep $mariadb > mariadb.txt
 
-volweb=$(cat web.txt | awk{'print$2'} )
-volmariadb=$(cat mariadb.txt | awk {'print$2'} )
+volweb=$(cat web.txt | awk {'print$2'})
+volmariadb=$(cat mariadb.txt | awk {'print$2'})
+
 
 sudo mkdir /mnt/web
 sudo mount 192.168.0.131:/$volweb /mnt/web
