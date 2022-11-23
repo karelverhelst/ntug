@@ -7,14 +7,14 @@ kubectl create ns ntug
 kubectl apply -f pvc-web.yaml -n ntug
 kubectl apply -f pvc-mariadb.yaml -n ntug
 
-web=$(kubectl get pvc -n ntug | grep web | awk {'print$3'} | grep -o '....$')
-mariadb=$(kubectl get pvc -n ntug | grep mariadb | awk {'print$3'} | grep -o '....$')
+sudo web=$(kubectl get pvc -n ntug | grep web | awk {'print$3'} | grep -o '....$')
+sudo mariadb=$(kubectl get pvc -n ntug | grep mariadb | awk {'print$3'} | grep -o '....$')
 
 ssh admin@192.168.0.101 vol show | grep $web > web.txt
 ssh admin@192.168.0.101 vol show | grep $mariadb > mariadb.txt
 
-volweb=$(cat web.txt | awk {'print$2'})
-volmariadb=$(cat mariadb.txt | awk {'print$2'})
+sudo volweb=$(cat web.txt | awk {'print$2'})
+sudo volmariadb=$(cat mariadb.txt | awk {'print$2'})
 
 
 sudo mkdir /mnt/web
