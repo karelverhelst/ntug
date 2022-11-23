@@ -1,3 +1,11 @@
+connect to the user@jumphost
+
+git clone https://github.com/karelverhelst/ntug
+
+cd  ntug
+
+=> password for sudo is Netapp1!
+
 sudo apt install -y nfs-common
 sudo apt install -y mysql-client
 
