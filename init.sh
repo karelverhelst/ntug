@@ -24,4 +24,12 @@ sudo mount 192.168.0.131:/$volmariadb /mnt/mariadb
 
 sudo tar -xzvf ntug.tgz
 
+sudo cp -R /home/user/ntug/mnt/c/ntug/mariadb/* /mnt/mariadb
+sudo cp -R /home/user/ntug/mnt/c/ntug/web/* /mnt/web
+
+kubectl apply -f service-web.yaml -n ntug
+kubectl apply -f service-mariadb.yaml -n ntug
+
+kubectl apply -f deployment-web.yaml -n ntug
+kubectl apply -f deployment-mariadb.yaml -n ntug
 
