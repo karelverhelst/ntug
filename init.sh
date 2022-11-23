@@ -8,9 +8,9 @@ sudo apt install -y mysql-client
 
 rke1
 
-k create ns ntug
-k apply -f pvc-web.yaml -n ntug
-k apply -f pvc-mariadb.yaml -n ntug
+kubectl create ns ntug
+kubectl apply -f pvc-web.yaml -n ntug
+kubectl apply -f pvc-mariadb.yaml -n ntug
 
 web=$(k get pvc -n ntug | grep web | awk {'print$3'} | grep -o '....$')
 mariadb=$(k get pvc -n ntug | grep mariadb | awk {'print$3'} | grep -o '....$')
